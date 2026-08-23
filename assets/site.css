@@ -544,3 +544,124 @@ summary:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* ------------------------------------------------------------- media band */
+/* Text beside a photo, never over it. The hero photograph spans a wide
+   luminance range (5th–95th percentile 0.07–0.62 relative luminance), so
+   overlaid text fails WCAG in both directions — white reaches only 1.57:1
+   against the bright wall, and --brand-primary only 1.49:1 against the dark
+   sweater. No single ink passes without a heavy scrim, which would fight the
+   clinical tone, so the type sits alongside instead. */
+
+.band {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+}
+@media (min-width: 52em) {
+  .band {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .band--text-first > .band__media {
+    order: 2;
+  }
+}
+
+.band__media {
+  margin: 0;
+}
+/* aspect-ratio + width/height on the <img> reserve the box before the file
+   arrives, so nothing reflows on load. */
+.band__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.band__body > :last-child {
+  margin-bottom: 0;
+}
+
+/* Hero variant: keep the existing hero type scale and spacing untouched. */
+.hero .band {
+  gap: var(--space-xl);
+}
+@media (min-width: 52em) {
+  .hero .band {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: var(--space-2xl);
+  }
+}
+.hero .band__body .hero__lede {
+  max-width: 34rem;
+}
+
+.band__caption {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: var(--space-sm) 0 0;
+  max-width: none;
+}
+
+/* ----------------------------------------------------------- icon strip */
+/* Navigational furniture: one stroke weight, one colour, no fills. */
+
+.capstrip {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: var(--space-sm);
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 34em) {
+  .capstrip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 60em) {
+  .capstrip {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.capstrip > li {
+  margin: 0;
+}
+
+.cap-tile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-xs);
+  text-align: center;
+  padding: var(--space-lg) var(--space-xs);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.cap-tile svg {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  color: var(--brand-primary);
+}
+
+.cap-tile span {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.section--tight {
+  padding-block: var(--space-xl);
+}

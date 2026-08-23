@@ -62,17 +62,120 @@
       <!-- 1 — HERO -->
       <section class="hero">
         <div class="container">
-          <p class="hero__eyebrow">Remote patient monitoring</p>
-          <h1>Your patients&rsquo; blood pressure, measured at home and reviewed by a clinical team.</h1>
-          <p class="hero__lede">
-            22 Remote Patient Monitoring enrolls your patients on connected home
-            devices, receives their readings as they are taken, and handles the daily
-            review, escalation and documentation that remote monitoring requires.
-          </p>
-          <div class="btn-row">
-            <a class="btn btn--primary" href="/contact.html">Talk to us about your panel</a>
-            <a class="btn btn--secondary" href="/for-providers.html">See how it works</a>
+          <div class="band band--text-first">
+            <div class="band__body">
+              <p class="hero__eyebrow">Remote patient monitoring</p>
+              <h1>Your patients&rsquo; blood pressure, measured at home and reviewed by a clinical team.</h1>
+              <p class="hero__lede">
+                22 Remote Patient Monitoring enrolls your patients on connected home
+                devices, receives their readings as they are taken, and handles the daily
+                review, escalation and documentation that remote monitoring requires.
+              </p>
+              <div class="btn-row">
+                <a class="btn btn--primary" href="/contact.html">Talk to us about your panel</a>
+                <a class="btn btn--secondary" href="/for-providers.html">See how it works</a>
+              </div>
+            </div>
+            <figure class="band__media">
+              <picture>
+                <source
+                  type="image/webp"
+                  sizes="(min-width: 52em) 30rem, 92vw"
+                  srcset="
+                    /assets/img/hero-480.webp   480w,
+                    /assets/img/hero-720.webp   720w,
+                    /assets/img/hero-960.webp   960w,
+                    /assets/img/hero-1280.webp 1280w
+                  "
+                />
+                <img
+                  src="/assets/img/hero-960.jpg"
+                  sizes="(min-width: 52em) 30rem, 92vw"
+                  srcset="
+                    /assets/img/hero-480.jpg   480w,
+                    /assets/img/hero-720.jpg   720w,
+                    /assets/img/hero-960.jpg   960w,
+                    /assets/img/hero-1280.jpg 1280w
+                  "
+                  width="1280"
+                  height="853"
+                  fetchpriority="high"
+                  decoding="async"
+                  alt="An older woman sits beside an older man in their living room, holding a digital blood pressure monitor and reading the display while he wears the inflated cuff on his upper arm."
+                />
+              </picture>
+            </figure>
           </div>
+        </div>
+      </section>
+
+
+      <!-- 1b — CAPABILITY STRIP -->
+      <section class="section section--tight" aria-labelledby="cap-h">
+        <div class="container">
+          <h2 id="cap-h" class="visually-hidden">What the service covers</h2>
+          <ul class="capstrip">
+            <li>
+              <div class="cap-tile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="9.5" cy="8" r="3.3"/><path d="M3.6 20c0-3.4 2.6-5.2 5.9-5.2s5.9 1.8 5.9 5.2"/><path d="M19 4.4v5.2M16.4 7h5.2"/>
+                </svg>
+                <span>Enrollment</span>
+              </div>
+            </li>
+            <li>
+              <div class="cap-tile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <rect x="6.2" y="3.2" width="11.6" height="17.6" rx="2.4"/><path d="M9.6 8.2h4.8M9.6 11.4h4.8"/><path d="M12 16.6h.01"/>
+                </svg>
+                <span>Device setup</span>
+              </div>
+            </li>
+            <li>
+              <div class="cap-tile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <rect x="3" y="5.2" width="18" height="13.6" rx="2.4"/><path d="M6.2 12.4h2.5l1.7-3.6 2.3 7 1.9-3.4h3.2"/>
+                </svg>
+                <span>Vital analysis</span>
+              </div>
+            </li>
+            <li>
+              <div class="cap-tile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M6 3.6h12a1.4 1.4 0 0 1 1.4 1.4v14a1.4 1.4 0 0 1-1.4 1.4H6a1.4 1.4 0 0 1-1.4-1.4V5A1.4 1.4 0 0 1 6 3.6z"/><path d="M8 8h5"/><path d="M8 14.4l2.2 2.2 4.4-4.8"/>
+                </svg>
+                <span>Clinical review</span>
+              </div>
+            </li>
+            <li>
+              <div class="cap-tile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M20.4 12.1a7.5 7.5 0 0 1-8 7.4 8.3 8.3 0 0 1-2.5-.4L4.6 20.8l1.5-4.3a7.2 7.2 0 0 1-1.5-4.4 7.5 7.5 0 0 1 8-7.4 7.5 7.5 0 0 1 7.8 7.4z"/><path d="M9.2 12.1h.01M12.4 12.1h.01M15.6 12.1h.01"/>
+                </svg>
+                <span>Patient engagement</span>
+              </div>
+            </li>
+            <li>
+              <div class="cap-tile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M3.8 20.4h16.4"/><path d="M7.4 20.4v-6.2M12 20.4V6.4M16.6 20.4v-9.4"/>
+                </svg>
+                <span>Billing &amp; reporting</span>
+              </div>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -160,12 +263,48 @@
             </li>
           </ol>
 
-          <div class="notice">
-            <p>
-              <strong>You stay the treating clinician.</strong> We monitor, contact
-              and document; decisions about diagnosis, medication and treatment
-              remain yours.
-            </p>
+          <div class="band" style="margin-top: var(--space-2xl)">
+            <figure class="band__media">
+              <picture>
+                <source
+                  type="image/webp"
+                  sizes="(min-width: 52em) 28rem, 92vw"
+                  srcset="
+                    /assets/img/app-480.webp   480w,
+                    /assets/img/app-720.webp   720w,
+                    /assets/img/app-960.webp   960w,
+                    /assets/img/app-1280.webp 1280w
+                  "
+                />
+                <img
+                  src="/assets/img/app-720.jpg"
+                  sizes="(min-width: 52em) 28rem, 92vw"
+                  srcset="
+                    /assets/img/app-480.jpg   480w,
+                    /assets/img/app-720.jpg   720w,
+                    /assets/img/app-960.jpg   960w,
+                    /assets/img/app-1280.jpg 1280w
+                  "
+                  width="1280"
+                  height="853"
+                  loading="lazy"
+                  decoding="async"
+                  alt="An older man sits on a sofa at home, smiling as he holds up his smartphone to check the readings he has just taken."
+                />
+              </picture>
+              <figcaption class="band__caption">
+                Step&nbsp;2 &mdash; the 22RPM app runs on the patient&rsquo;s own phone.
+              </figcaption>
+            </figure>
+            <div class="band__body">
+              <div class="notice" style="margin-top:0">
+                <p>
+                  <strong>You stay the treating clinician.</strong> We monitor, contact
+                  and document; decisions about diagnosis, medication and treatment
+                  remain yours.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -209,8 +348,45 @@
       <!-- 5 — WHO IT'S FOR -->
       <section class="section">
         <div class="container">
-          <p class="section__label">Who it&rsquo;s for</p>
-          <h2>Practices where blood pressure control changes the outcome.</h2>
+          <div class="band band--text-first">
+            <div class="band__body">
+              <p class="section__label">Who it&rsquo;s for</p>
+              <h2>Practices where blood pressure control changes the outcome.</h2>
+              <p class="lede" style="margin-bottom:0">
+                The program suits clinicians who already manage blood pressure as a
+                core part of the care plan, and who need to see it between visits.
+              </p>
+            </div>
+            <figure class="band__media">
+              <picture>
+                <source
+                  type="image/webp"
+                  sizes="(min-width: 52em) 28rem, 92vw"
+                  srcset="
+                    /assets/img/provider-480.webp   480w,
+                    /assets/img/provider-720.webp   720w,
+                    /assets/img/provider-960.webp   960w,
+                    /assets/img/provider-1280.webp 1280w
+                  "
+                />
+                <img
+                  src="/assets/img/provider-720.jpg"
+                  sizes="(min-width: 52em) 28rem, 92vw"
+                  srcset="
+                    /assets/img/provider-480.jpg   480w,
+                    /assets/img/provider-720.jpg   720w,
+                    /assets/img/provider-960.jpg   960w,
+                    /assets/img/provider-1280.jpg 1280w
+                  "
+                  width="1280"
+                  height="853"
+                  loading="lazy"
+                  decoding="async"
+                  alt="A clinician in a white coat with a stethoscope around her neck sits at a wooden desk by a window, typing on a laptop with a tablet beside her."
+                />
+              </picture>
+            </figure>
+          </div>
           <div class="grid grid--4">
             <div class="card">
               <h3>Nephrology</h3>
