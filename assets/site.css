@@ -665,3 +665,142 @@ summary:focus-visible {
 .section--tight {
   padding-block: var(--space-xl);
 }
+
+/* --------------------------------------------------------- card artwork */
+/* Same line language as the capability strip: one stroke weight, one colour,
+   inherited via currentColor. Decorative only — every card's meaning is in
+   its heading and prose, so the SVGs are aria-hidden. */
+
+.card__fig,
+.card__icon {
+  width: 40px;
+  height: 40px;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-sm);
+}
+.card__icon {
+  width: 44px;
+  height: 44px;
+}
+
+
+/* ------------------------------------------------------------ CPT table */
+
+.table-scroll {
+  overflow-x: auto;
+  margin-top: var(--space-xl);
+  max-width: var(--measure);
+  -webkit-overflow-scrolling: touch;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+table.cpt {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  text-align: left;
+}
+table.cpt caption {
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding-bottom: var(--space-sm);
+}
+table.cpt thead th {
+  background: var(--brand-primary);
+  color: var(--text-inverse);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--space-sm) var(--space-md);
+  white-space: nowrap;
+}
+table.cpt tbody th,
+table.cpt tbody td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+table.cpt tbody tr:nth-child(odd) {
+  background: var(--surface-sunken);
+}
+/* The section behind this table is already sunken, so stripe against white. */
+.section--sunken table.cpt tbody tr:nth-child(odd) {
+  background: var(--surface);
+}
+.cpt__code {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  font-weight: 700;
+  color: var(--brand-primary);
+  white-space: nowrap;
+}
+.cpt__thr {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.table-hint {
+  display: none;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* Below 40em the three columns restack as labelled rows — no silent
+   overflow, and no horizontal scrolling on a phone. */
+@media (max-width: 39.99em) {
+  .table-scroll {
+    overflow-x: visible;
+  }
+  table.cpt thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+  table.cpt tbody tr {
+    display: block;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--brand-primary);
+    border-radius: var(--radius-sm);
+    background: var(--surface) !important;
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+  table.cpt tbody th,
+  table.cpt tbody td {
+    display: block;
+    padding: 0;
+    border-bottom: 0;
+  }
+  .cpt__code {
+    font-size: 1.15rem;
+    margin-bottom: var(--space-xs);
+  }
+  table.cpt tbody td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: var(--space-sm) 0 var(--space-2xs);
+  }
+}
+
+/* Between 40em and the point the table stops needing it, show the scroll
+   affordance rather than letting a column disappear off the edge. */
+@media (min-width: 40em) and (max-width: 52em) {
+  .table-hint {
+    display: block;
+  }
+}
