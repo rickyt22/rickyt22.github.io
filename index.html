@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/assets/favicon-180.png" />
     <link rel="stylesheet" href="/assets/brand.css" />
-    <link rel="stylesheet" href="/assets/site.css" />
+    <link rel="stylesheet" href="/assets/site.css?v=16" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -46,7 +46,12 @@
             alt="22 Remote Patient Monitoring Services"
           />
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" type="button" aria-expanded="false"
+                aria-controls="site-nav">
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+          <span>Menu</span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
           <ul>
             <li><a href="/" aria-current="page">Home</a></li>
             <li><a href="/for-providers.html">For providers</a></li>
@@ -65,11 +70,14 @@
           <div class="band band--text-first">
             <div class="band__body">
               <p class="hero__eyebrow">Remote patient monitoring</p>
-              <h1>Your patients&rsquo; blood pressure, measured at home and reviewed by a clinical team.</h1>
+              <h1>
+                Between visits, your patients are
+                <span class="hl">still your patients</span>.
+              </h1>
               <p class="hero__lede">
-                22 Remote Patient Monitoring enrolls your patients on connected home
-                devices, receives their readings as they are taken, and handles the daily
-                review, escalation and documentation that remote monitoring requires.
+                22RPM enrolls your patients on connected home devices, receives their
+                readings as they&rsquo;re taken, and handles the daily review,
+                escalation and documentation that remote monitoring requires.
               </p>
               <div class="btn-row">
                 <a class="btn btn--primary" href="/contact.html">Talk to us about your panel</a>
@@ -110,11 +118,17 @@
       </section>
 
 
-      <!-- 1b — CAPABILITY STRIP -->
+      <!-- 1b — WHAT THE SERVICE COVERS -->
       <section class="section section--tight" aria-labelledby="cap-h">
         <div class="container">
-          <h2 id="cap-h" class="visually-hidden">What the service covers</h2>
-          <ul class="capstrip">
+          <ul class="feature-grid">
+            <li class="feature-panel">
+              <h2 id="cap-h">What the service covers</h2>
+              <p>
+                From enrollment through to billing, run by our clinical team
+                rather than added to yours.
+              </p>
+            </li>
             <li>
               <div class="cap-tile">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -221,6 +235,75 @@
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- 2b — DIALYSIS (lead market) -->
+      <section class="section section--inverse dialysis" aria-labelledby="dialysis-h">
+        <div class="container">
+          <p class="section__label">Dialysis</p>
+          <h2 id="dialysis-h">Dialysis covers three days a week. Monitoring covers the other four.</h2>
+
+          <div class="dialysis__lead">
+            <div>
+              <p class="lede">
+                For dialysis clinics, 22RPM provides a comprehensive at-home
+                monitoring program for the days your patients are not in the chair.
+              </p>
+              <p>
+                An in-center patient is seen three times a week. The care model has
+                no window into the other four days, and interdialytic weight gain and
+                blood pressure are exactly what build during them &mdash; out of view
+                until the next session.
+              </p>
+              <p>
+                We close that window: readings taken at home, reviewed by our clinical
+                team, and escalated to your clinic with the context attached.
+              </p>
+              <div class="btn-row">
+                <a class="btn btn--primary" href="/contact.html">Talk to us about your clinic</a>
+              </div>
+            </div>
+
+            <!-- ================================================================
+                 PLACEHOLDER — replace this whole <figure> with the real photo.
+                 See the build report for sourcing specs (4:3, 1600x1200 min).
+                 Delete the .dialysis__placeholder rule from site.css too.
+                 ================================================================ -->
+            <figure class="dialysis__media">
+              <div class="dialysis__placeholder">
+                <strong>Photograph to source</strong>
+                <span>
+                  4:3, 1600&times;1200 minimum. A patient taking a reading at home,
+                  or a clinician reviewing them.
+                </span>
+              </div>
+            </figure>
+          </div>
+
+          <ul class="dialysis__points">
+            <li>
+              <strong>Between sessions</strong>
+              <span>
+                Readings are taken at home on the days the patient is not in the
+                chair, on the same connected devices used across the program.
+              </span>
+            </li>
+            <li>
+              <strong>Reviewed, not just collected</strong>
+              <span>
+                Our clinical team looks at what comes in, contacts the patient when
+                something is off, and records the time and the note behind it.
+              </span>
+            </li>
+            <li>
+              <strong>Escalated to the clinic</strong>
+              <span>
+                When a reading or a trend needs your team's attention, it reaches
+                them with the context attached rather than as a raw alert.
+              </span>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -625,5 +708,6 @@
         </div>
       </div>
     </footer>
+    <script src="/assets/site.js?v=16" defer></script>
   </body>
 </html>

@@ -10,6 +10,37 @@
   box-sizing: border-box;
 }
 
+/* Height of the sticky masthead in its scrolled/compact state, measured at
+   63px in Chrome at both 1280px and 375px (the mobile nav collapses to one
+   row, so the two agree). Anchor targets are offset by it plus a little air
+   so a jumped-to heading never lands underneath the header. */
+:root {
+  /* Page wash and band, both desaturated tints of --brand-primary over white
+     (6% and 14%) rather than new hues. Measured against the inks that sit on
+     them — on the wash: --text 13.05:1, --text-muted 6.32:1, --brand-primary
+     11.58:1; on the band: 11.19:1, 5.42:1, 9.93:1. All clear AA. White cards
+     lift off the wash at 1.12:1 and off the band at 1.30:1, helped by their
+     existing border.
+
+     These live in site.css, not brand.css, so brand.css stays byte-identical
+     to the copy /bp-guide/ consumes. */
+  --page: #f0f3f4;
+  --surface-sunken: #dbe3e6;
+  /* brand accent at 32% over the page wash */
+  --hl-tone: #a3dfe5;
+
+  /* Measured in Chrome at both 1280px and 375px: the sticky wrapper is 98px
+     at rest and 72px once compact (56px panel inside an 8px gutter). */
+  --header-h-stuck: 72px;
+  --anchor-offset: calc(var(--header-h-stuck) + 0.75rem);
+}
+html {
+  scroll-padding-top: var(--anchor-offset);
+}
+:where([id]) {
+  scroll-margin-top: var(--anchor-offset);
+}
+
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -20,7 +51,7 @@ body {
   font-size: 1rem;
   line-height: 1.65;
   color: var(--text);
-  background: var(--surface);
+  background: var(--page);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -46,6 +77,39 @@ h4 {
 h1 {
   font-size: clamp(1.85rem, 5.2vw, 2.9rem);
   letter-spacing: -0.02em;
+}
+/* The hero headline carries the page, so it scales further than other h1s and
+   sets tighter. clamp() keeps it sane from 375px up. */
+.hero h1 {
+  font-size: clamp(2.2rem, 5.4vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-lg);
+  /* Base ink is the near-black --text; only the highlighted span carries
+     --brand-primary, so the two are told apart by the underline rather than
+     by hue alone (they are close in value: 13.05:1 and 11.58:1 on the wash). */
+  color: var(--text);
+  text-wrap: balance;
+}
+
+/* Highlighted phrase in the hero headline.
+   Measured: #013550 on the page wash 11.58:1, and 8.76:1 where glyphs overlap
+   the underline tone (#a3dfe5, the brand accent at 32% over the wash). The
+   underline itself is 1.32:1 against the wash — soft, but it is decoration,
+   not a carrier of meaning.
+
+   Drawn with a background gradient rather than text-decoration or box-shadow
+   so thickness and vertical position are both controllable, and with
+   box-decoration-break: clone so a wrapped phrase paints an underline under
+   every line fragment instead of one stretched box. */
+.hero h1 .hl {
+  color: var(--brand-primary);
+  background-image: linear-gradient(var(--hl-tone), var(--hl-tone));
+  background-repeat: no-repeat;
+  background-size: 100% 0.2em;
+  background-position: 0 0.92em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 h2 {
   font-size: clamp(1.4rem, 3.6vw, 2rem);
@@ -100,7 +164,7 @@ summary:focus-visible {
   background: var(--brand-primary);
   color: var(--text-inverse);
   padding: var(--space-sm) var(--space-md);
-  z-index: 100;
+  z-index: 200;
 }
 .skip-link:focus {
   left: var(--space-md);
@@ -122,9 +186,48 @@ summary:focus-visible {
 
 /* ---------------------------------------------------------------- header */
 
+/* Sticky masthead.
+   Solid --surface rather than translucent. Measured first: nav ink #1c2b33
+   over an 80%-white header sitting on the worst content that actually passes
+   underneath (the #013550 inverse CTA and footer, and the hero photo's
+   shadows) still clears 9.83:1, so translucency would have been legible —
+   it is declined for robustness, not contrast. Solid needs no backdrop-filter
+   support and costs nothing to composite on a phone. */
+/* The sticky element is a transparent gutter painted in the page wash; the
+   white rounded panel sits inset within it. Painting the gutter rather than
+   leaving it clear means content scrolling past disappears cleanly above the
+   panel instead of sliding through the gap. */
 .site-header {
-  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--page);
+  padding: var(--space-xs) var(--space-md);
+
+  /* The compact-on-scroll geometry rides on inherited custom properties
+     rather than descendant selectors, so the children each keep one simple
+     rule and the whole header resizes by re-declaring two values below. */
+  --hdr-pad: var(--space-sm);
+  --hdr-logo: 208px;
+}
+/* Set by site.js once the page has scrolled past the top. */
+.site-header.is-stuck {
+  --hdr-pad: var(--space-2xs);
+  --hdr-logo: 170px;
+}
+
+/* The panel itself. .container already gives it max-width, auto margins and
+   inline padding; this adds the surface, the radius and the lift. */
+.site-header__inner {
   background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(1, 53, 80, 0.04), 0 6px 18px rgba(1, 53, 80, 0.05);
+  transition: box-shadow 0.18s ease, padding-block 0.18s ease;
+}
+/* Deepen once scrolled so the panel reads as a layer above the content. */
+.site-header.is-stuck .site-header__inner {
+  box-shadow: 0 2px 4px rgba(1, 53, 80, 0.08), 0 10px 28px rgba(1, 53, 80, 0.10);
 }
 
 .site-header__inner {
@@ -132,8 +235,11 @@ summary:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
-  padding-block: var(--space-sm);
+  padding-block: var(--hdr-pad);
   flex-wrap: wrap;
+  /* The global prefers-reduced-motion block collapses every transition to
+     0.01ms, so this snaps rather than animates when reduced motion is set. */
+  transition: padding-block 0.18s ease;
 }
 
 .site-logo {
@@ -142,10 +248,12 @@ summary:focus-visible {
   text-decoration: none;
   flex-shrink: 0;
 }
-/* Source artwork is 563px wide; capped at 208px so it stays sharp on 2x. */
+/* Source artwork is 563px wide; capped at 208px so it stays sharp on 2x,
+   narrowing to 170px once the header is stuck. */
 .site-logo img {
-  width: 208px;
+  width: var(--hdr-logo);
   max-width: 52vw;
+  transition: width 0.18s ease;
 }
 
 .site-nav ul {
@@ -176,12 +284,96 @@ summary:focus-visible {
   border-bottom-color: var(--brand-primary);
 }
 
+/* ------------------------------------------------- mobile nav disclosure */
+/* Without JS the nav stays exactly as it was — visible, wrapping, reachable.
+   The collapse is scoped to .js so a script failure can never hide the
+   navigation. */
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  display: block;
+  width: 17px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+.nav-toggle__bars {
+  position: relative;
+}
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.nav-toggle__bars::before {
+  top: -5px;
+}
+.nav-toggle__bars::after {
+  top: 5px;
+}
+
 @media (max-width: 39.99em) {
+  /* Logo left, menu button right — one compact row. */
   .site-header__inner {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .js .nav-toggle {
+    display: inline-flex;
+  }
+  /* Collapsed by default; the button reveals it as a full-width panel. */
+  .js .site-nav {
+    display: none;
+    flex-basis: 100%;
+  }
+  .js .site-nav[data-open="true"] {
+    display: block;
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-xs);
+    padding-top: var(--space-xs);
+    /* The header is sticky, so an open panel must never grow taller than the
+       screen — matters most in landscape, where the viewport is ~375px tall. */
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .js .site-nav[data-open="true"] ul {
+    flex-direction: column;
+    gap: 0;
+  }
+  .js .site-nav[data-open="true"] a {
+    display: block;
+    padding: var(--space-sm) var(--space-2xs);
+    border-bottom: 0;
+    border-left: 3px solid transparent;
+    padding-left: var(--space-sm);
+  }
+  .js .site-nav[data-open="true"] a[aria-current="page"] {
+    border-left-color: var(--brand-primary);
+    background: var(--brand-primary-100);
+  }
+  /* No-JS fallback keeps the old centred, wrapping treatment. */
+  html:not(.js) .site-header__inner {
     justify-content: center;
     text-align: center;
   }
-  .site-nav ul {
+  html:not(.js) .site-nav ul {
     justify-content: center;
     gap: var(--space-xs) var(--space-md);
   }
@@ -585,15 +777,45 @@ summary:focus-visible {
   margin-bottom: 0;
 }
 
-/* Hero variant: keep the existing hero type scale and spacing untouched. */
+/* Hero: a deliberately unequal split. The text column takes the larger share
+   and the photograph runs off the right edge of the viewport rather than
+   stopping at the container margin. */
 .hero .band {
   gap: var(--space-xl);
 }
 @media (min-width: 52em) {
   .hero .band {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: var(--space-2xl);
+    /* Tracks chosen so that once the (capped) bleed is added back to the image,
+       the rendered split lands on ~55/45 and stays there: the bleed no longer
+       grows without limit, so the image cannot overtake the text on a wide
+       monitor the way it did above ~1750px before. */
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
   }
+  /* Full-bleed right. Percentage margins on a grid item resolve against the
+     grid AREA, not the container, so the usual calc(50% - 50vw) trick
+     overshoots badly here. Compute the gutter explicitly instead: half the
+     leftover viewport beyond the container, plus the container's own padding.
+     max() keeps it at zero once the viewport is narrower than the container. */
+  .hero .band__media {
+    /* Bleeds right, but capped at 8rem so it stops short of the edge on wide
+       monitors instead of ballooning. Below the container width the gutter is
+       just the container padding, so it still reaches the edge there. */
+    margin-right: calc(
+      -1 * min(8rem, max(0px, (100vw - var(--container)) / 2) + var(--space-lg))
+    );
+  }
+  .hero .band__media img {
+    border-radius: 14px 0 0 14px;
+    border-right: 0;
+    aspect-ratio: 4 / 3;
+  }
+}
+/* vw units include the scrollbar in some engines, so the bleed can overhang by
+   a few pixels; clip rather than let the page scroll sideways. */
+.hero {
+  overflow-x: clip;
 }
 .hero .band__body .hero__lede {
   max-width: 34rem;
@@ -697,17 +919,27 @@ summary:focus-visible {
   outline-offset: 3px;
 }
 
+/* The outline lives on the table itself, not the scroll wrapper: a <caption>
+   box sits outside the table's border box, so this keeps the caption above the
+   outline and lets the dark header row occupy the top edge with its corners
+   clipped. Requires border-collapse: separate for the radius to render. */
 table.cpt {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 0.95rem;
   text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  overflow: hidden;
 }
 table.cpt caption {
   text-align: left;
   font-size: 0.85rem;
   color: var(--text-muted);
   padding-bottom: var(--space-sm);
+  max-width: var(--measure);
 }
 table.cpt thead th {
   background: var(--brand-primary);
@@ -719,18 +951,34 @@ table.cpt thead th {
   padding: var(--space-sm) var(--space-md);
   white-space: nowrap;
 }
+/* Column hints so "16 or more transmission days" breaks once, not twice. */
+table.cpt thead th:nth-child(1) {
+  width: 6.5rem;
+}
+table.cpt thead th:nth-child(3) {
+  width: 14rem;
+}
+.cpt__thr {
+  padding-inline: var(--space-sm) var(--space-md);
+}
 table.cpt tbody th,
 table.cpt tbody td {
   padding: var(--space-md);
   border-bottom: 1px solid var(--border);
   vertical-align: top;
 }
-table.cpt tbody tr:nth-child(odd) {
-  background: var(--surface-sunken);
+table.cpt thead th {
+  border-bottom: 1px solid var(--brand-primary);
 }
-/* The section behind this table is already sunken, so stripe against white. */
-.section--sunken table.cpt tbody tr:nth-child(odd) {
+/* Every row is white and separated by a rule. Striping was dropped: the light
+   stripe sat too close to the band tone behind the table and the pattern read
+   as noise rather than structure. */
+table.cpt tbody tr {
   background: var(--surface);
+}
+table.cpt tbody tr:last-child th,
+table.cpt tbody tr:last-child td {
+  border-bottom: 0;
 }
 .cpt__code {
   font-variant-numeric: tabular-nums;
@@ -755,8 +1003,12 @@ table.cpt tbody tr:nth-child(odd) {
 /* Below 40em the three columns restack as labelled rows — no silent
    overflow, and no horizontal scrolling on a phone. */
 @media (max-width: 39.99em) {
+  /* Restacked as cards, so the wrapper outline would box the whole stack. */
   .table-scroll {
     overflow-x: visible;
+    background: none;
+    border: 0;
+    border-radius: 0;
   }
   table.cpt thead {
     position: absolute;
@@ -803,4 +1055,219 @@ table.cpt tbody tr:nth-child(odd) {
   .table-hint {
     display: block;
   }
+}
+
+/* ---------------------------------------------------- icon chips + grid */
+
+/* Every inline icon becomes a soft tinted rounded square. Done by styling the
+   existing <svg> directly — padding inside a border-box element leaves a 26px
+   glyph in a 52px tile — so no markup changed to introduce the chips. */
+.card__icon,
+.card__fig,
+.cap-tile svg {
+  width: 52px;
+  height: 52px;
+  padding: 13px;
+  border-radius: 14px;
+  background: var(--brand-primary-100);
+  color: var(--brand-primary);
+  margin-bottom: var(--space-md);
+}
+
+
+/* --- asymmetric feature grid ------------------------------------------- */
+/* One large filled panel to land on first, then tiles of two widths. Single
+   column on mobile; the spans only switch on at 48em. */
+
+.feature-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+.feature-grid > li {
+  margin: 0;
+}
+
+@media (min-width: 48em) {
+  .feature-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+  }
+  .feature-grid > .feature-panel {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  /* The last two run wide, so the block does not end on a uniform row. */
+  .feature-grid > li:nth-last-child(-n + 2) {
+    grid-column: span 2;
+  }
+}
+
+.feature-panel {
+  background: var(--brand-primary);
+  color: var(--text-inverse);
+  border-radius: 14px;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+.feature-panel h2 {
+  color: var(--text-inverse);
+  font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+  margin: 0;
+}
+.feature-panel p {
+  color: var(--text-on-inverse-muted);
+  margin: 0;
+  max-width: 26rem;
+}
+
+.cap-tile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  text-align: left;
+  padding: var(--space-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.cap-tile svg {
+  margin-bottom: var(--space-sm);
+}
+.cap-tile span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+/* The two wide tiles read better with the icon beside the label. */
+@media (min-width: 48em) {
+  .feature-grid > li:nth-last-child(-n + 2) .cap-tile {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .feature-grid > li:nth-last-child(-n + 2) .cap-tile svg {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+}
+
+/* Notices sit on the band inside sunken sections, so lift them to white. */
+.section--sunken .notice {
+  background: var(--surface);
+}
+
+/* ------------------------------------------------------------- dialysis */
+/* The lead-market section: given more air than its neighbours, a larger
+   heading, and a photograph, so it reads as the centrepiece rather than a
+   text block on a coloured band. */
+
+.dialysis {
+  padding-block: var(--space-3xl);
+}
+.dialysis h2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.85rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+  margin-bottom: var(--space-lg);
+}
+
+.dialysis__lead {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+  margin-bottom: var(--space-3xl);
+}
+@media (min-width: 52em) {
+  .dialysis__lead {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: var(--space-2xl);
+  }
+}
+.dialysis__lead .lede {
+  font-size: 1.2rem;
+  color: var(--text-inverse);
+}
+
+.dialysis__media {
+  margin: 0;
+}
+.dialysis__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+/* PLACEHOLDER BOX — delete this rule together with the .dialysis__placeholder
+   markup once a real photograph is dropped in. */
+.dialysis__placeholder {
+  aspect-ratio: 4 / 3;
+  border: 2px dashed var(--brand-accent);
+  border-radius: 14px;
+  display: grid;
+  place-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+}
+.dialysis__placeholder strong {
+  color: var(--brand-accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.dialysis__placeholder span {
+  color: var(--text-on-inverse-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 26ch;
+}
+
+.dialysis__points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: var(--space-xl);
+}
+@media (min-width: 48em) {
+  .dialysis__points {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2xl);
+  }
+}
+.dialysis__points > li {
+  margin: 0;
+  padding-top: var(--space-md);
+  border-top: 2px solid var(--brand-accent);
+}
+.dialysis__points strong {
+  display: block;
+  color: var(--text-inverse);
+  font-size: 1.05rem;
+  margin-bottom: var(--space-xs);
+}
+.dialysis__points span {
+  display: block;
+  color: var(--text-on-inverse-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
