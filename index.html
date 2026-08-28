@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/assets/favicon-180.png" />
     <link rel="stylesheet" href="/assets/brand.css" />
-    <link rel="stylesheet" href="/assets/site.css?v=16" />
+    <link rel="stylesheet" href="/assets/site.css?v=17" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -265,19 +265,34 @@
               </div>
             </div>
 
-            <!-- ================================================================
-                 PLACEHOLDER — replace this whole <figure> with the real photo.
-                 See the build report for sourcing specs (4:3, 1600x1200 min).
-                 Delete the .dialysis__placeholder rule from site.css too.
-                 ================================================================ -->
             <figure class="dialysis__media">
-              <div class="dialysis__placeholder">
-                <strong>Photograph to source</strong>
-                <span>
-                  4:3, 1600&times;1200 minimum. A patient taking a reading at home,
-                  or a clinician reviewing them.
-                </span>
-              </div>
+              <picture>
+                <source
+                  type="image/webp"
+                  sizes="(min-width: 52em) 28rem, 92vw"
+                  srcset="
+                    /assets/img/dialysis-480.webp   480w,
+                    /assets/img/dialysis-720.webp   720w,
+                    /assets/img/dialysis-960.webp   960w,
+                    /assets/img/dialysis-1280.webp 1280w
+                  "
+                />
+                <img
+                  src="/assets/img/dialysis-720.jpg"
+                  sizes="(min-width: 52em) 28rem, 92vw"
+                  srcset="
+                    /assets/img/dialysis-480.jpg   480w,
+                    /assets/img/dialysis-720.jpg   720w,
+                    /assets/img/dialysis-960.jpg   960w,
+                    /assets/img/dialysis-1280.jpg 1280w
+                  "
+                  width="1280"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                  alt="A clinician in scrubs, with a stethoscope around her neck, sits at a desk looking at an open laptop and holding a pen."
+                />
+              </picture>
             </figure>
           </div>
 
@@ -708,6 +723,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/site.js?v=16" defer></script>
+    <script src="/assets/site.js?v=17" defer></script>
   </body>
 </html>

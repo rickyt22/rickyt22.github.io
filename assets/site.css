@@ -1214,32 +1214,6 @@ table.cpt tbody tr:last-child td {
   border-radius: 14px;
 }
 
-/* PLACEHOLDER BOX — delete this rule together with the .dialysis__placeholder
-   markup once a real photograph is dropped in. */
-.dialysis__placeholder {
-  aspect-ratio: 4 / 3;
-  border: 2px dashed var(--brand-accent);
-  border-radius: 14px;
-  display: grid;
-  place-content: center;
-  gap: var(--space-xs);
-  padding: var(--space-lg);
-  text-align: center;
-  background: rgba(255, 255, 255, 0.04);
-}
-.dialysis__placeholder strong {
-  color: var(--brand-accent);
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.dialysis__placeholder span {
-  color: var(--text-on-inverse-muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  max-width: 26ch;
-}
-
 .dialysis__points {
   list-style: none;
   margin: 0;
