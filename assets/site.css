@@ -1293,3 +1293,104 @@ table.cpt tbody tr:last-child td {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+/* ------------------------------------------ providers hero + eligibility */
+
+/* Providers hero: the headline runs full width, then the lede sits in a tinted
+   panel beside the photograph so it reads as a statement rather than body copy.
+   The panel is top-aligned (align-items: start) — stretching it to the photo's
+   height left a band of dead space above and below the text. */
+.hero--stacked h1 {
+  font-size: clamp(2.1rem, 5vw, 3.9rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  max-width: 20ch;
+}
+.hero__split {
+  display: grid;
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+  align-items: start;
+}
+@media (min-width: 52em) {
+  .hero__split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+}
+.pullquote {
+  background: var(--brand-primary-100);
+  border-left: 5px solid var(--brand-accent);
+  border-radius: 0 14px 14px 0;
+  padding: var(--space-2xl) var(--space-xl);
+}
+/* Measured: --brand-primary on --brand-primary-100 is 11.01:1. */
+.pullquote p {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--brand-primary);
+  max-width: none;
+}
+/* 3:2 rather than 4:3: with the panel top-aligned it no longer stretches, so a
+   4:3 photo ran ~200px past the bottom of the panel and the gap simply moved
+   outside it. The shorter ratio brings the two columns close to level. */
+.hero__split .band__media img {
+  aspect-ratio: 3 / 2;
+  border-radius: 14px;
+}
+
+/* Eligibility criteria: a checklist across the full width rather than a bullet
+   list in a narrow column. The mark reuses the two-tone language of the device
+   illustrations. */
+.criteria {
+  list-style: none;
+  margin: var(--space-xl) 0 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: var(--space-lg);
+}
+@media (min-width: 48em) {
+  .criteria {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl) var(--space-2xl);
+  }
+}
+.criteria > li {
+  margin: 0;
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+.crit-ico {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.crit-ico .f {
+  fill: var(--dev-fill);
+  stroke: var(--brand-primary);
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+}
+.crit-ico .i {
+  fill: none;
+  stroke: var(--brand-primary);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.criteria strong {
+  display: block;
+  color: var(--brand-primary);
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+.criteria span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.97rem;
+  line-height: 1.6;
+}

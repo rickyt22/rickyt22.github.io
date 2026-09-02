@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/assets/favicon-180.png" />
     <link rel="stylesheet" href="/assets/brand.css" />
-    <link rel="stylesheet" href="/assets/site.css?v=19" />
+    <link rel="stylesheet" href="/assets/site.css?v=20" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -64,15 +64,51 @@
     </header>
 
     <main id="main">
-      <section class="hero">
+      <section class="hero hero--stacked">
         <div class="container">
           <p class="hero__eyebrow">For providers</p>
-          <h1>What remote monitoring actually asks of your practice.</h1>
-          <p class="hero__lede">
-            Short version: you identify the patients and stay their treating
-            clinician. We run the device logistics, the daily review, the patient
-            contact, and the documentation.
-          </p>
+          <h1>
+            What remote monitoring <span class="hl">actually asks</span> of your
+            practice.
+          </h1>
+          <div class="hero__split">
+            <div class="pullquote">
+              <p>
+                Short version: you identify the patients and stay their treating
+                clinician. We run the device logistics, the daily review, the
+                patient contact, and the documentation.
+              </p>
+            </div>
+            <figure class="band__media">
+              <picture>
+                <source
+                  type="image/webp"
+                  sizes="(min-width: 52em) 28rem, 92vw"
+                  srcset="
+                    /assets/img/providers-480.webp   480w,
+                    /assets/img/providers-720.webp   720w,
+                    /assets/img/providers-960.webp   960w,
+                    /assets/img/providers-1280.webp 1280w
+                  "
+                />
+                <img
+                  src="/assets/img/providers-720.jpg"
+                  sizes="(min-width: 52em) 28rem, 92vw"
+                  srcset="
+                    /assets/img/providers-480.jpg   480w,
+                    /assets/img/providers-720.jpg   720w,
+                    /assets/img/providers-960.jpg   960w,
+                    /assets/img/providers-1280.jpg 1280w
+                  "
+                  width="1280"
+                  height="960"
+                  fetchpriority="high"
+                  decoding="async"
+                  alt="A clinician in scrubs, with a stethoscope around her neck and a pen in hand, looking at a laptop screen."
+                />
+              </picture>
+            </figure>
+          </div>
         </div>
       </section>
 
@@ -85,22 +121,34 @@
             being actively managed, where readings taken at home will inform that
             management.
           </p>
-          <ul>
+          <ul class="criteria">
             <li>
-              The patient has a chronic or acute condition that warrants physiologic
-              monitoring &mdash; in our program, most often hypertension or chronic
-              kidney disease.
+              <svg class="crit-ico" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle class="f" cx="24" cy="24" r="19"/><path class="i" d="M15.5 24.5l6 6 11-13"/></svg>
+              <div>
+                <strong>A condition being managed</strong>
+                <span>The patient has a chronic or acute condition that warrants physiologic monitoring &mdash; in our program, most often hypertension or chronic kidney disease.</span>
+              </div>
             </li>
             <li>
-              There is an established treating relationship with your practice.
+              <svg class="crit-ico" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle class="f" cx="24" cy="24" r="19"/><path class="i" d="M15.5 24.5l6 6 11-13"/></svg>
+              <div>
+                <strong>An established relationship</strong>
+                <span>There is an established treating relationship with your practice.</span>
+              </div>
             </li>
             <li>
-              The patient consents to the program, and understands that cost-sharing
-              may apply depending on their coverage.
+              <svg class="crit-ico" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle class="f" cx="24" cy="24" r="19"/><path class="i" d="M15.5 24.5l6 6 11-13"/></svg>
+              <div>
+                <strong>Consent obtained</strong>
+                <span>The patient consents to the program, and understands that cost-sharing may apply depending on their coverage.</span>
+              </div>
             </li>
             <li>
-              The patient is able to take their own readings, or has someone at home
-              who can help them.
+              <svg class="crit-ico" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle class="f" cx="24" cy="24" r="19"/><path class="i" d="M15.5 24.5l6 6 11-13"/></svg>
+              <div>
+                <strong>Able to take readings</strong>
+                <span>The patient is able to take their own readings, or has someone at home who can help them.</span>
+              </div>
             </li>
           </ul>
           <div class="notice">
@@ -285,6 +333,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/site.js?v=19" defer></script>
+    <script src="/assets/site.js?v=20" defer></script>
   </body>
 </html>
