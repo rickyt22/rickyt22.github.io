@@ -28,6 +28,8 @@
   --surface-sunken: #dbe3e6;
   /* brand accent at 32% over the page wash */
   --hl-tone: #a3dfe5;
+  /* brand primary at 30% over white */
+  --dev-fill: #b3c2ca;
 
   /* Measured in Chrome at both 1280px and 375px: the sticky wrapper is 98px
      at rest and 72px once compact (56px panel inside an 8px gutter). */
@@ -1244,4 +1246,50 @@ table.cpt tbody tr:last-child td {
   color: var(--text-on-inverse-muted);
   font-size: 0.95rem;
   line-height: 1.65;
+}
+
+/* -------------------------------------------------- device illustrations */
+/* The four "What we monitor" devices deliberately diverge from the thin line
+   glyphs elsewhere: they are two-tone — a soft brand tint filling the body,
+   a darker brand stroke for detail — so each reads as its actual device at a
+   glance. They are consistent with each other, which is what matters here. */
+
+/* A fixed-ratio slot so a product photograph can replace the illustration
+   later without any layout change: swap the <svg> for an <img> and it fills
+   the same box. */
+.card__media {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background: var(--brand-primary-100);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dev {
+  width: 96px;
+  height: 96px;
+}
+/* --dev-fill is brand primary at 30% over white. --brand-primary-200 was too
+   close to the slot's --brand-primary-100 (1.18:1) for the fill to register;
+   this sits at 1.56:1 against it, which reads as two tones without shouting. */
+.dev .f {
+  fill: var(--dev-fill);
+  stroke: var(--brand-primary);
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+}
+.dev .i {
+  fill: none;
+  stroke: var(--brand-primary);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }

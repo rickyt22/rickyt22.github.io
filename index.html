@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/assets/favicon-180.png" />
     <link rel="stylesheet" href="/assets/brand.css" />
-    <link rel="stylesheet" href="/assets/site.css?v=17" />
+    <link rel="stylesheet" href="/assets/site.css?v=19" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -427,9 +427,11 @@
           </p>
           <div class="grid grid--4">
             <div class="card">
-              <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                   aria-hidden="true" focusable="false"><rect x="3.2" y="6.6" width="13.6" height="10.8" rx="2.6"/><path d="M6.6 10.4h6.8M6.6 13.8h4"/><path d="M16.8 12h1.5a2.4 2.4 0 0 1 2.4 2.4v3.2"/></svg>
+              <div class="card__media">
+                <svg class="dev" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                  <rect class="f" x="5" y="12" width="25" height="20" rx="6"/><path class="i" d="M12 12v20"/><path class="i" d="M17 18h8M17 26h8"/><path class="i" d="M30 17c6 0 9 3 9 9v3"/><rect class="f" x="33" y="29" width="12" height="14" rx="3.5"/><path class="i" d="M36 33.5h6M36 37.5h4"/>
+                </svg>
+              </div>
               <h3>Blood pressure</h3>
               <p>
                 Systolic and diastolic pressure with pulse rate, captured on a
@@ -438,9 +440,11 @@
               </p>
             </div>
             <div class="card">
-              <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                   aria-hidden="true" focusable="false"><rect x="4" y="8" width="16" height="8" rx="3"/><path d="M9.2 8v8"/><circle cx="6.6" cy="12" r="1.1"/><path d="M12.4 12h4.4"/></svg>
+              <div class="card__media">
+                <svg class="dev" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                  <path class="f" d="M18 17h-8a6 6 0 0 0 0 12h8z"/><rect class="f" x="17" y="11" width="26" height="24" rx="6"/><rect class="i" x="22" y="16" width="16" height="14" rx="3"/><path class="i" d="M24.5 23h2l1.5-3.8 2.2 7.6 1.5-3.8h3"/>
+                </svg>
+              </div>
               <h3>Pulse oximetry</h3>
               <p>
                 Peripheral oxygen saturation (SpO<sub>2</sub>) with pulse rate, for
@@ -448,9 +452,11 @@
               </p>
             </div>
             <div class="card">
-              <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                   aria-hidden="true" focusable="false"><rect x="3.4" y="4.6" width="17.2" height="14.8" rx="2.8"/><rect x="9" y="7.8" width="6" height="3.6" rx="1.1"/><path d="M7.4 15.4h3.2M13.4 15.4h3.2"/></svg>
+              <div class="card__media">
+                <svg class="dev" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                  <rect class="f" x="4" y="7" width="40" height="34" rx="7"/><rect class="i" x="17" y="12" width="14" height="9" rx="3"/><rect class="i" x="9" y="26" width="12" height="9" rx="3"/><rect class="i" x="27" y="26" width="12" height="9" rx="3"/>
+                </svg>
+              </div>
               <h3>Weight</h3>
               <p>
                 Daily weight on a connected scale, for patients where fluid status
@@ -458,9 +464,11 @@
               </p>
             </div>
             <div class="card">
-              <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                   aria-hidden="true" focusable="false"><path d="M2.6 12h3.4l1.6-4.6 2.7 9.2 2-6.4 1.5 3.4h6.2"/></svg>
+              <div class="card__media">
+                <svg class="dev" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                  <rect class="f" x="11" y="4" width="26" height="40" rx="7"/><rect class="i" x="15.5" y="9" width="17" height="17" rx="3"/><path class="i" d="M17.5 18h2.2l1.5-4 2.2 8 1.5-4h5.1"/><circle class="i" cx="24" cy="34" r="4"/><path class="i" d="M16.5 40.5h15"/>
+                </svg>
+              </div>
               <h3>ECG</h3>
               <p>
                 Single-lead ECG on a handheld recorder, for patients whose clinician
@@ -723,6 +731,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/site.js?v=17" defer></script>
+    <script src="/assets/site.js?v=19" defer></script>
   </body>
 </html>
