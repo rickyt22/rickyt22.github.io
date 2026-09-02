@@ -1323,7 +1323,14 @@ table.cpt tbody tr:last-child td {
   background: var(--brand-primary-100);
   border-left: 5px solid var(--brand-accent);
   border-radius: 0 14px 14px 0;
-  padding: var(--space-2xl) var(--space-xl);
+  padding: var(--space-xl);
+}
+
+/* The taller vertical padding exists only to bring the panel closer to the
+   photo's height in the two-column layout. Stacked, there is nothing to match
+   and it would just be dead height. */
+@media (min-width: 52em) {
+  .hero__split .pullquote { padding: var(--space-2xl) var(--space-xl); }
 }
 /* Measured: --brand-primary on --brand-primary-100 is 11.01:1. */
 .pullquote p {
