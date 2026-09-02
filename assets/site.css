@@ -830,61 +830,6 @@ summary:focus-visible {
   max-width: none;
 }
 
-/* ----------------------------------------------------------- icon strip */
-/* Navigational furniture: one stroke weight, one colour, no fills. */
-
-.capstrip {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-width: none;
-  display: grid;
-  gap: var(--space-sm);
-  grid-template-columns: repeat(2, 1fr);
-}
-@media (min-width: 34em) {
-  .capstrip {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (min-width: 60em) {
-  .capstrip {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-.capstrip > li {
-  margin: 0;
-}
-
-.cap-tile {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--space-xs);
-  text-align: center;
-  padding: var(--space-lg) var(--space-xs);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-}
-
-.cap-tile svg {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  color: var(--brand-primary);
-}
-
-.cap-tile span {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.3;
-  text-wrap: balance;
-}
 
 .section--tight {
   padding-block: var(--space-xl);
@@ -1065,8 +1010,7 @@ table.cpt tbody tr:last-child td {
    existing <svg> directly — padding inside a border-box element leaves a 26px
    glyph in a 52px tile — so no markup changed to introduce the chips. */
 .card__icon,
-.card__fig,
-.cap-tile svg {
+.card__fig {
   width: 52px;
   height: 52px;
   padding: 13px;
@@ -1076,96 +1020,6 @@ table.cpt tbody tr:last-child td {
   margin-bottom: var(--space-md);
 }
 
-
-/* --- asymmetric feature grid ------------------------------------------- */
-/* One large filled panel to land on first, then tiles of two widths. Single
-   column on mobile; the spans only switch on at 48em. */
-
-.feature-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-width: none;
-  display: grid;
-  gap: var(--space-md);
-  grid-template-columns: 1fr;
-}
-.feature-grid > li {
-  margin: 0;
-}
-
-@media (min-width: 48em) {
-  .feature-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
-  }
-  .feature-grid > .feature-panel {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-  /* The last two run wide, so the block does not end on a uniform row. */
-  .feature-grid > li:nth-last-child(-n + 2) {
-    grid-column: span 2;
-  }
-}
-
-.feature-panel {
-  background: var(--brand-primary);
-  color: var(--text-inverse);
-  border-radius: 14px;
-  padding: var(--space-xl);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: var(--space-sm);
-}
-.feature-panel h2 {
-  color: var(--text-inverse);
-  font-size: clamp(1.3rem, 2.4vw, 1.75rem);
-  margin: 0;
-}
-.feature-panel p {
-  color: var(--text-on-inverse-muted);
-  margin: 0;
-  max-width: 26rem;
-}
-
-.cap-tile {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 0;
-  text-align: left;
-  padding: var(--space-lg);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-}
-.cap-tile svg {
-  margin-bottom: var(--space-sm);
-}
-.cap-tile span {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.35;
-  text-wrap: balance;
-}
-
-/* The two wide tiles read better with the icon beside the label. */
-@media (min-width: 48em) {
-  .feature-grid > li:nth-last-child(-n + 2) .cap-tile {
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-md);
-  }
-  .feature-grid > li:nth-last-child(-n + 2) .cap-tile svg {
-    margin-bottom: 0;
-    flex-shrink: 0;
-  }
-}
 
 /* Notices sit on the band inside sunken sections, so lift them to white. */
 .section--sunken .notice {
@@ -1401,3 +1255,116 @@ table.cpt tbody tr:last-child td {
   font-size: 0.97rem;
   line-height: 1.6;
 }
+
+/* ------------------------------------------------ capability ledger */
+
+/* A ruled editorial list rather than a card grid: this section is a
+   capabilities pitch, and rules read as "here is what the service is" where a
+   wall of tiles reads as a feature dump. The promoted item breaks out of the
+   two columns into a tinted full-width band, which is the whole reason for the
+   ruled treatment — a band only reads as promoted against something quieter. */
+.cap-ico .f {
+  fill: var(--dev-fill);
+  stroke: var(--brand-primary);
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+}
+.cap-ico .i {
+  fill: none;
+  stroke: var(--brand-primary);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ledger {
+  list-style: none;
+  margin: var(--space-2xl) 0 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: 0 var(--space-2xl);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 48em) {
+  .ledger { grid-template-columns: 1fr 1fr; }
+}
+.ledger > li {
+  margin: 0;
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--border);
+}
+.ledger__row {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+.ledger .cap-ico {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+.ledger h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+  color: var(--brand-primary);
+}
+.ledger p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: none;
+}
+
+/* The promoted item: a tinted band spanning both columns. */
+.ledger .feat {
+  grid-column: 1 / -1;
+  border-top: 0;
+  background: var(--brand-primary-100);
+  border-left: 5px solid var(--brand-accent);
+  border-radius: 0 14px 14px 0;
+  padding: var(--space-2xl) var(--space-xl);
+  margin-block: var(--space-lg);
+}
+.ledger .feat .ledger__row { gap: var(--space-xl); }
+.ledger .feat .cap-ico { width: 84px; height: 84px; }
+.ledger .feat h3 {
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  margin-bottom: 0.5rem;
+}
+.ledger .feat p {
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  color: var(--brand-primary);
+  line-height: 1.55;
+}
+/* Stacked, an 84px icon beside text leaves the text a very short measure. */
+@media (max-width: 47.99em) {
+  .ledger .feat .ledger__row { flex-direction: column; }
+}
+
+/* Five ordinary items do not divide into two columns. Rather than leave the
+   last one beside an empty ruled cell, it closes the list full width. */
+.ledger .last { grid-column: 1 / -1; }
+.ledger .last p { max-width: 62ch; }
+
+/* Condensed variant — providers page, directly under the hero. Same items and
+   the same promotion, one line of copy each, smaller icons, tighter rows. */
+.ledger--tight { margin-top: var(--space-xl); }
+.ledger--tight > li { padding: var(--space-lg) 0; }
+.ledger--tight .cap-ico { width: 36px; height: 36px; }
+.ledger--tight .ledger__row { gap: var(--space-md); }
+.ledger--tight h3 { font-size: 1rem; margin-bottom: 0.15rem; }
+.ledger--tight p { font-size: 0.92rem; line-height: 1.5; }
+.ledger--tight .feat {
+  padding: var(--space-lg) var(--space-xl);
+  margin-block: var(--space-md);
+}
+.ledger--tight .feat .cap-ico { width: 52px; height: 52px; }
+.ledger--tight .feat .ledger__row { gap: var(--space-lg); }
+/* Centring only makes sense while the row is horizontal — once it stacks, it
+   centres the icon over left-aligned text, which reads as a mistake. */
+@media (min-width: 48em) {
+  .ledger--tight .feat .ledger__row { align-items: center; }
+}
+.ledger--tight .feat h3 { font-size: 1.2rem; }
+.ledger--tight .feat p { font-size: 1rem; }
