@@ -1368,3 +1368,33 @@ table.cpt tbody tr:last-child td {
 }
 .ledger--tight .feat h3 { font-size: 1.2rem; }
 .ledger--tight .feat p { font-size: 1rem; }
+
+/* ------------------------------------------------------------ legal pages */
+
+/* Long-form legal prose. Numbered headings carry the structure, so they get
+   more space above than below to bind each one to its own section rather than
+   floating between two. Lists inherit the body measure so a one-word item and
+   a three-line item start on the same left edge. */
+.legal h2 {
+  font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+  color: var(--brand-primary);
+  margin: var(--space-2xl) 0 var(--space-sm);
+}
+.legal h2:first-of-type { margin-top: var(--space-lg); }
+.legal h3 {
+  font-size: 1.05rem;
+  color: var(--brand-primary);
+  margin: var(--space-xl) 0 var(--space-xs);
+}
+.legal ul {
+  max-width: var(--measure);
+  margin: 0 0 var(--space-md);
+  padding-left: 1.25rem;
+}
+.legal li { margin-bottom: 0.35rem; }
+.legal .notice { margin-bottom: var(--space-xl); }
+.legal__address {
+  font-style: normal;
+  line-height: 1.7;
+  max-width: var(--measure);
+}
